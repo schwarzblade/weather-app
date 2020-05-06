@@ -84,15 +84,21 @@ function getWeather(latitude,longitude){
 		.then(response => {
 			let data = response.json();
 			return data;
-			console.log(data);
 		})
 		.then(data => {
 			weather.temperature.value = Math.floor(data.main.temp - KELVIN);
-			weather.description = data.weather[0].icon;
+			weather.description = data.weather[0].description;
 			weather.iconId = data.weather[0].icon;
 			weather.city = data.name;
 			weather.country = data.sys.country;
 		})
+		.then(()=> updateUI())
+}
 
-		
+
+function updateUI(){
+	iconElement.innerHTML = `<img src="./icons/${weather.iconId}.png" alt="">`;
+	tempElement.innerHTML = `${weather.temperature.value}&#x2103`	
+	descElement.innerHTML = `<p>${weather.description}</p>`
+	locationElement.innerHTML = `<p>${weather.country},${weather.city}</p>`
 }
