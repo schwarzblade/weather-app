@@ -102,3 +102,23 @@ function updateUI(){
 	descElement.innerHTML = `<p>${weather.description}</p>`
 	locationElement.innerHTML = `<p>${weather.country},${weather.city}</p>`
 }
+
+
+//C to F
+function celsiusToFahrenheid(temperature){
+	return (temperature * 9/5) + 32;
+}
+
+//eventListener
+tempElement.addEventListener('click', () => {
+	if(weather.temperature.value === undefined) return;
+		if(weather.temperature.unit == "celsius"){
+			let fahrenheit = celsiusToFahrenheid(weather.temperature.value);
+			fahrenheit = Math.floor(fahrenheit);
+			tempElement.innerHTML = `${fahrenheit}&#x2109`;
+			weather.temperature.unit == "fahrenheit";
+		} else {
+			tempElement.innerHTML = `${weather.temperature.value}&#x2103`;
+			weather.temperature.unit == "celsius";
+		}
+	});
