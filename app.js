@@ -32,16 +32,14 @@ const key = "82005d27a116c2880c8f0fcb866998a0";
 
 
 //check if browser supports geolocation
-function getLocation() {
+
 	if('geolocation' in navigator){
 		navigator.geolocation.getCurrentPosition(setPosition,showError);
 	} else {
 		notificationElement.style.display = "block";
 		notificationElement.innerHTML = "<p>Browser dosen't support geolocation</p>";
 	}
-}
 
-getLocation();
 function setPosition(position){
 	let latitude = position.coords.latitude;
 	let longitude = position.coords.longitude;
@@ -112,13 +110,17 @@ function celsiusToFahrenheid(temperature){
 //eventListener
 tempElement.addEventListener('click', () => {
 	if(weather.temperature.value === undefined) return;
-		if(weather.temperature.unit == "celsius"){
+		
+		if(weather.temperature.unit == "celcius"){
 			let fahrenheit = celsiusToFahrenheid(weather.temperature.value);
 			fahrenheit = Math.floor(fahrenheit);
+
 			tempElement.innerHTML = `${fahrenheit}&#x2109`;
-			weather.temperature.unit == "fahrenheit";
+			weather.temperature.unit = "fahrenheit";
 		} else {
+
 			tempElement.innerHTML = `${weather.temperature.value}&#x2103`;
-			weather.temperature.unit == "celsius";
+			
+			weather.temperature.unit = "celcius";
 		}
 	});
